@@ -154,7 +154,7 @@
         <hr>
 
         <!--Best Friend Modal-->
-        <div id="BestFriend" class="modal fade" role="dialog">
+        <div id="bestFriendModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -237,11 +237,11 @@
 
             //posts the userData via Ajax to the friends.js file
             $.post(currentURL + "/api/friends", userData, function(data) {
-                console.log("Posted!");
-                //Grabs best friend name
-                //Grabs best friend picture
-                //Toggles best friend modal
-                
+                //Updates the bestFriend name/photo and toggles the best friend modal on posting the new userData
+                $("#bestFriend").text(data.name);
+                $("#bestFriendPhoto").attr("src", data.photo);
+                $("#bestFriendModal").modal("toggle");
+
                 //Clears the form on submitting
                 $("#name").val("");
                 $("#photo").val("");
