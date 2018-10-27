@@ -1,17 +1,18 @@
 {
-    "name": "friendfinder",
-    "version": "1.0.0",
-    "description": "An app to find your best friend at the bottom of the sea",
-    "main": "server.js",
-    "scripts": {
-      "start": "node server.js"
-    },
-    "author": "Peter Reijerkerk",
-    "dependencies": {
-      "express": "^4.16.3"
-    },
-    "engines": {
-      "npm": "6.4.x",
-      "node": "10.6.x"
-    }
+  "name": "friendfinder",
+  "version": "1.0.0",
+  "description": "An app to find your best friend at the bottom of the sea",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Peter Reijerkerk",
+  "dependencies": {
+    "express": "^4.16.4",
+    "path": "^0.12.7"
+  },
+  "engines": {
+    "npm": "6.4.x",
+    "node": "10.6.x"
   }
+}
