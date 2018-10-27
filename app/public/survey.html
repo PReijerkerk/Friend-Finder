@@ -153,6 +153,25 @@
         <button type="submit" class="btn btn-lg btn-primary btn-block" id="submit"><i class="fas fa-check-circle" aria-hidden="true"></i>Submit</button>
         <hr>
 
+        <!--Best Friend Modal-->
+        <div id="BestFriend" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Your New Friend!</h3>
+                    </div>
+                    <div class="modal-body">
+                        <h2 id="bestFriend"></h2>
+                        <img id="bestFriendPhoto" src="#">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="footer">
                 <div class="container">
                     <p>
@@ -173,46 +192,76 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
     
     <script type="text/javascript">
-        $(function(){
-            $(".chosen-select").chosen();
-        });
-    </script>
-
-    <script>
+        
+        //On click function attached to the submit button
         $("#submit").on("click", function(event) {
             event.preventDefault();
-            console.log("Clicked the button!");
 
-            //Validate users data before created the new user objects
-
+        //Validate users data before created the new user objects
+        function validateForm() {
+            var isValid = true;
+            $('.validate').each(function() {
+                if ($(this).val() === ''){
+                    isValid = false;
+                }
+            });
+            $('.chosen-select').each(function() {
+                if ($(this).val() === ""){
+                    isValid = false;
+                }
+            });
+            return isValid;
+        }
+        //If all fields are filled
+        if (validateForm() == true) {
+        
+            //Creates a new object for the input userData
             let userData = {
-                name: $("#name").val(),
-                photo: $("#photo").val(),
+                name: $("#name").val().trim(),
+                photo: $("#photo").val().trim(),
                 scores: [
-                    $("q1").val(),
-                    $("q2").val(),
-                    $("q3").val(),
-                    $("q4").val(),
-                    $("q5").val(),
-                    $("q6").val(),
-                    $("q7").val(),
-                    $("q8").val(),
-                    $("q9").val(),
-                    $("q10").val(),
+                    $("#q1").val(),
+                    $("#q2").val(),
+                    $("#q3").val(),
+                    $("#q4").val(),
+                    $("#q5").val(),
+                    $("#q6").val(),
+                    $("#q7").val(),
+                    $("#q8").val(),
+                    $("#q9").val(),
+                    $("#q10").val(),
                 ]
             };
 
-            console.log(userData);
+            let currentURL = window.location.origin;
 
             //posts the userData via Ajax to the friends.js file
+            $.post(currentURL + "/api/friends", userData, function(data) {
+                console.log("Posted!");
+                //Grabs best friend name
+                //Grabs best friend picture
+                //Toggles best friend modal
+                
+                //Clears the form on submitting
+                $("#name").val("");
+                $("#photo").val("");
+                $("#q1").val("");
+                $("#q2").val("");
+                $("#q3").val("");
+                $("#q4").val("");
+                $("#q5").val("");
+                $("#q6").val("");
+                $("#q7").val("");
+                $("#q8").val("");
+                $("#q9").val("");
+                $("#q10").val("");
+            });
 
-            //Compares user score to past users scores to find most compatible partner
-
-            //Show a modal with best matched peoople
-
-            //Else statement if user has not submitted all required data
+            //Else statement if user has not submitted all required data  
+        }   else {
+                alert("Please fill out all fields before submitting survey!")
+            }
         });
-    
-    </script>
+</script>
 </body>
 </html>
